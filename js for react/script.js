@@ -142,4 +142,112 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
-//
+// //Destrcucturing
+
+// const book = getBook(3);
+
+// // const title = book.title;
+// // const author = book.author;
+
+// const { title, author, pages, publicationDate, genres } = book;
+// book;
+// console.log(title, author);
+
+// // const primaryGenre = genres[0];
+// // const secondaryGenre = genres[1];
+
+// const [primaryGenre, secondaryGenre, ...otherGenres] = genres; //Rest operator
+// console.log(primaryGenre, secondaryGenre, otherGenres);
+
+// const newGenres = ["epic fantasy", ...genres];
+// console.log(newGenres);
+
+// const updateBook = { book, moviePublicationDate: "2021-12-19" };
+// updateBook;
+
+// //template litereals
+
+// const summary = `${title}a book`;
+// summary;
+
+// //Array function
+
+// const getYear = (str) => {
+//   return str.split("-")[0];
+// };
+
+// console.log(getYear(publicationDate));
+
+// console.log("some value" && 0);
+
+// //optional chaining
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews.goodreads.reviewsCount;
+  const librarything = book.reviews.librarything?.reviewsCount ?? 0;
+  librarything;
+  return goodreads + librarything;
+}
+// console.log(getTotalReviewCount(book));
+
+//map method
+const books = getBooks();
+books;
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+x;
+const titles = books.map((book) => book.title);
+titles;
+
+const essentialData = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+essentialData;
+//filter method
+
+const longBooksWithamovie = books
+  .filter((book) => book.pages > 500)
+  .filter((book) => book.hasMovieAdaptation);
+longBooksWithamovie;
+
+const adventureBooks = books
+  .filter((books) => books.genres.includes("adventure"))
+  .map((book) => book.title);
+adventureBooks;
+
+//reduce method
+
+const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+pagesAllBooks;
+
+//Sort Method
+const arr = [3, 7, 1, 9, 6];
+const sorted = arr.slice().sort((a, b) => a - b);
+sorted;
+arr;
+
+const sortedByPages = books.slice().sort((a, b) => b.pages - a.pages);
+sortedByPages;
+
+//Working with immutable arrays
+
+//Add book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the chamber of Sectres",
+  author: "J. K. Rowling",
+};
+const booksAfterAdd = [...books, newBook];
+booksAfterAdd;
+
+//Delete book object from array
+
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id != 3);
+booksAfterDelete;
+
+//update a book object in the array
+
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1210 } : book
+);
+booksAfterUpdate;
