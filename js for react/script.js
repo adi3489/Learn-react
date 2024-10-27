@@ -145,6 +145,8 @@ function getBook(id) {
 // //Destrcucturing
 
 // const book = getBook(3);
+book = []
+<child book ={book}/>
 
 // // const title = book.title;
 // // const author = book.author;
