@@ -1,13 +1,13 @@
 import { useState } from "react";
 
 function Step() {
-  const [count, setCount] = useState(0);
+  const [step, setStep] = useState(1);
 
   return (
     <div>
-      <button onClick={() => setCount(count - 1)}>-</button>
-      Step:{count}
-      <button onClick={() => setCount(count + 1)}>+</button>
+      <button onClick={() => setStep(step - 1)}>-</button>
+      Step:{step}
+      <button onClick={() => setStep(step + 1)}>+</button>
     </div>
   );
 }
